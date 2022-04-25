@@ -16,9 +16,6 @@ def legislators_by_zipcode(zip)
       levels: 'country',
       roles: %w[legislatorUpperBody legislatorLowerBody]
     ).officials
-  # legislators = legislators.officials
-  # legislator_names = legislators.map(&:name)
-  # legislators_string = legislator_names.join(", ")
   rescue StandardError
     'You can find your representatives by visiting www.commoncause.org/take-action/find-elected-officials'
   end
@@ -48,6 +45,10 @@ erb_template = ERB.new template_letter
 contents.each do |row|
   id = row[0]
   name = row[:first_name]
+  phone_number = row[:homephone]
+
+  phone_number.gsub!(/[^\d]/, '')
+
 
   zipcode = clean_zipcode(row[:zipcode])
 
@@ -55,9 +56,9 @@ contents.each do |row|
 
   form_letter = erb_template.result(binding)
 
-  save_thank_you_letter(id, form_letter)
+  # save_thank_you_letter(id, form_letter)
 
-  # puts form_letter "#{name} #{zipcode} #{legislators}"
+  puts "#{name} #{phone_number}"
 end
 
 # Everything bellow this line is building a CSV parser from scratch just to understand how it's done.
