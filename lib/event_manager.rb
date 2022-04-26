@@ -32,14 +32,14 @@ def save_thank_you_letter(id, form_letter)
 end
 
 def clean_phone_number(phone_number)
-    phone_number.gsub!(/[^\d]/, '')
-    if phone_number.length == 10
-      phone_number
-    elsif phone_number.length == 11 && phone_number[0] == '1'
-      phone_number[1..10]
-    else 
-      "Wrong number!"
-    end
+  phone_number.gsub!(/[^\d]/, '')
+  if phone_number.length == 10
+    phone_number
+  elsif phone_number.length == 11 && phone_number[0] == '1'
+    phone_number[1..10]
+  else
+    'Wrong number!'
+  end
 end
 
 puts 'EventManager Initialized!'
